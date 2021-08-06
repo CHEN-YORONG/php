@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<form onsubmit="ajaxSend(); return false">
+    <input type="number" name="a" placeholder="a"> +
+    <input type="number" name="b" placeholder="b">
+    <button>=</button> <span id="result"></span>
+</form>
+
+<br>
+
+<script>
+    //請比較 0802-12-ajax-get
+    const af = document.querySelector('input[name=a]');
+    const bf = document.querySelector('input[name=b]');
+    const result = document.querySelector('#result');
+
+    function ajaxSend() {
+        const sp = new URLSearchParams();
+        sp.set('a', af.value);
+        sp.set('b', bf.value);
+
+        fetch('0802-08-query-string.php?' + sp.toString())
+        .then(r=>r.text())
+        .then(txt=>{
+            result.innerText = txt;
+        })
+
+        
+    }
+</script>
+</body>
+</html>
