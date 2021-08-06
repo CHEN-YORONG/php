@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<form name="form1" onsubmit="sendData(); return false;">
+    <input type="number" name="a" placeholder="a"> +
+    <input type="number" name="b" placeholder="b">
+    <button>=</button>
+</form>
+
+<div id="info"></div>
+
+<script>
+    function sendData(){
+        const fd = new FormData(document.form1); // 表單物件
+
+        fetch('0804-02-post-data.php', {
+            method: 'POST',
+            body: fd,
+        }).then(function(response){
+            return response.text();
+        }).then(function(txt){
+            info.innerText = txt;
+        });
+    }
+</script>
+</body>
+</html>
