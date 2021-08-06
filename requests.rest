@@ -1,0 +1,27 @@
+
+GET  http://127.0.0.1/mfee19-php/test/0802-08-query-string.php?a=5&b=10
+
+
+
+
+###  分隔
+
+
+
+GET http://127.0.0.1/mfee19-php/test/0802-14-for.php
+
+
+### 分隔
+
+
+
+
+### POST 網址
+### Content-Type:
+###
+### 值            結構不能變
+
+POST http://127.0.0.1/mfee19-php/test/0804-02-post-data.php
+Content-Type: application/x-www-form-urlencoded
+
+a=100&b=66
