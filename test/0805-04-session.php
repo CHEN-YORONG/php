@@ -5,6 +5,7 @@ if(! isset($_SESSION['num'])){
     $_SESSION['num']++;
 }
 $_SESSION['num'];
+// unset($_SESSION['num']); 刪除某個session
 ?>
 <!DOCTYPE html>
 <html lang="en">
