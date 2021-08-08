@@ -1,4 +1,5 @@
-<?php $title = '登入';?>
+<?php 
+$title = '登入';?>
 <?php include __DIR__. '/partoals/html-head.php'; ?>
 <?php include __DIR__. '/partoals/navbar.php'; ?>
     <style>
@@ -6,11 +7,7 @@
             color: red;
             display: none;
         }
-
-        
     </style>
-
-
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -22,12 +19,12 @@
                         <div class="form-group">
                             <label for="account">帳號</label>
                             <input type="text" class="form-control" id="account" name="account">
-                            <small  class="form-text">請填寫帳號</small>
+                            <small class="form-text">請填寫帳號</small>
                         </div>
                         <div class="form-group">
                             <label for="password">密碼</label>
                             <input type="password" class="form-control" id="password" name="password">
-                            <small  class="form-text">請填寫密碼</small>
+                            <small class="form-text">請填寫密碼</small>
                         </div>
                         
                         <button type="submit" class="btn btn-primary">登入</button>
@@ -44,8 +41,8 @@
 <script>
     function sendForm(){
         let isPass = true;
-        document.form1.account.nextElementSibling.style.display='none';
-        document.form1.password.nextElementSibling.style.display='none';
+        document.form1.account.nextElementSibling.style.display = 'none'; //回復到原來的狀態 不燃都還是紅色的
+        document.form1.password.nextElementSibling.style.display = 'none'; //回復到原來的狀態 不燃都還是紅色的
         if(! document.form1.account.value){
             document.form1.account.nextElementSibling.style.display = 'block';
             isPass = false;
@@ -55,7 +52,19 @@
             isPass = false;
         }
 
-        if(isPass){
+        if(isPass) {
+            const fd = new FormData(document.form1);
+
+            fetch('login-api.php', {
+                method: 'POST',
+                body: fd
+            
+            
+            }).then(r=>r.text())
+            .then(txt=>{
+                console.log('result',txt);
+            })
+
 
         }
     }
