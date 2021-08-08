@@ -60,9 +60,9 @@ $title = '登入';?>
                 body: fd
             
             
-            }).then(r=>r.text())
-            .then(txt=>{
-                console.log('result',txt);
+            }).then(r=>r.json())
+            .then(obj=>{
+                console.log('result',obj);
             })
 
 
