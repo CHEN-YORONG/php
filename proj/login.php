@@ -63,6 +63,11 @@ $title = '登入';?>
             }).then(r=>r.json())
             .then(obj=>{
                 console.log('result',obj);
+                if(obj.success){
+                    location.href = 'index_.php'; //跳轉到別的葉面
+                }else{
+                    alert(obj.error);
+                }
             })
 
 
