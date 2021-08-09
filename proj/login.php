@@ -1,5 +1,6 @@
 <?php 
-$title = '登入';?>
+    include __DIR__.'/partoals/init.php';
+    $title = '登入';?>
 <?php include __DIR__. '/partoals/html-head.php'; ?>
 <?php include __DIR__. '/partoals/navbar.php'; ?>
     <style>
