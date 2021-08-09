@@ -1,6 +1,13 @@
 <?php 
     include __DIR__.'/partoals/init.php';
-    $title = '登入';?>
+    $title = '登入';
+
+    if(isset($_SESSION['user'])){
+        header('Location: index_.php'); //redirect 直接跳轉到別的頁面 PHP
+        exit;
+    }
+    ?>
+
 <?php include __DIR__. '/partoals/html-head.php'; ?>
 <?php include __DIR__. '/partoals/navbar.php'; ?>
     <style>
@@ -65,7 +72,7 @@
             .then(obj=>{
                 console.log('result',obj);
                 if(obj.success){
-                    location.href = 'index_.php'; //跳轉到別的葉面
+                    location.href = 'index_.php'; //跳轉到別的葉面 JS
                 }else{
                     alert(obj.error);
                 }
