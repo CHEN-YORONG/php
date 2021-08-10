@@ -8,25 +8,36 @@ $title = '新增資料';
     <div class="row">
         <div class="col-md-6">
 
-            <div class="card" style="width: 18rem;">
+            <div class="card" >
 
                 <div class="card-body">
                     <h5 class="card-title">新增資料</h5>
-                    <form>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    <form name="form1" onsubmit="checkForm();return false;">
+                        <div class="form-group">
+                            <label for="name">name</label>
+                            <input type="text" class="form-control" id="name" >
+                            <small  class="form-text text-muted"></small>
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
+
+                        <div class="form-group">
+                            <label for="email">email</label>
+                            <input type="text" class="form-control" id="email" >
+                            <small  class="form-text text-muted"></small>
                         </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+
+                        <div class="form-group">
+                            <label for="mobile">mobile</label>
+                            <input type="text" class="form-control" id="mobile" >
+                            <small  class="form-text text-muted"></small>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                        <div class="form-group">
+                            <label for="bithday">bithday</label>
+                            <input type="text" class="form-control" id="bithday" >
+                            <small  class="form-text text-muted"></small>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">新增</button>
                     </form>
                 </div>
             </div>
@@ -37,4 +48,15 @@ $title = '新增資料';
     </div>
 </div>
 <?php include __DIR__ . '/partoals/scripts.php'; ?>
+
+<script>
+function checkForm(){
+
+    
+}
+
+</script>
+
+
+
 <?php include __DIR__ . '/partoals/html-foot.php'; ?>
