@@ -49,7 +49,16 @@ $title = '新增資料';
 
 <script>
 function checkForm(){
+    //TODO: 資料欄位檢查
 
+
+    const fd =new FormData(document.form1);
+    fetch('data-insert-api.php',{
+        method:'POST',
+        body:fd
+    }).then(r=>r.text())
+      .then(txt=>{console.log(txt);
+    });
 
 }
 
