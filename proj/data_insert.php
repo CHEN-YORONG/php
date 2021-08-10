@@ -56,10 +56,12 @@ function checkForm(){
     fetch('data-insert-api.php',{
         method:'POST',
         body:fd
-    }).then(r=>r.text())
-      .then(txt=>{console.log(txt);
+    }).then(r=>r.json())
+      .then(obj=>{console.log(obj);
+    })
+    .catch(error=>{
+        console.log('error:',error);
     });
-
 }
 
 </script>
