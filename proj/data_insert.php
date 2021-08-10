@@ -10,7 +10,7 @@ $title = '新增資料';
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">新增資料</h5>
-                    <form name="form1" >
+                    <form name="form1" onsubmit="checkForm();return false;">
                         <div class="form-group">
                             <label for="name">name</label>
                             <input type="text" class="form-control" id="name" name="name" >
