@@ -21,6 +21,16 @@ $totalPages = ceil($totalRows / $perPage); //ceil() 無條件進位
 // echo "$totalRows,$totalPages"; exit; 查看幾筆,幾頁
 
 
+//讓page的值在安全的範圍 <1的 都是0  page=多大 都跳到$totalPages
+if($page<1){
+    header('Location:?page=1');
+    exit;
+}
+if($page>$totalPages){
+    header('Location:?page='. $totalPages);
+    exit;
+}
+
 //SELECT * FROM address_book ORDER BY sid DESC LIMIT 0,5  (索引直0開始  , 5個)
 //SELECT * FROM address_book ORDER BY sid DESC LIMIT 5,5  第二頁
 //($page-1)*$perPage  第二頁 (2-1)*5=5   第三頁 (3-1)*5=10
