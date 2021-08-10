@@ -43,14 +43,14 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
         <div class="col">
             <nav aria-label="Page navigation example">
                 <ul class="pagination d-flex justify-content-end">
-
+                    <!-- 最前頁 -->
                     <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
                         <!-- disabled  a連結禁止點擊 -->
                         <a class="page-link" href="?page=1">
-                            <i class="fas fa-arrow-left"></i>
+                            <i class="fas fa-angle-double-left"></i>
                         </a>
                     </li>
-
+                    <!-- 上一頁 -->
                     <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
                         <!-- disabled  a連結禁止點擊 -->
                         <a class="page-link" href="?page=<?= $page - 1 ?>">
@@ -66,18 +66,21 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
                         <!-- active b4屬性 反白 -->
                     <?php endfor; ?>
 
-
+                    <!-- 下一頁 -->
                     <li class="page-item <?= $page >= $totalPages ? 'disabled' : ''  ?>">
                         <a class="page-link" href="?page=<?= $page + 1 ?>">
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </li>
 
+                    <!-- 最後一頁 -->
                     <li class="page-item <?= $page >= $totalPages ? 'disabled' : ''  ?>">
-                        <a class="page-link" href="?page=<?= $totalPages?>">
-                            <i class="fas fa-arrow-right"></i>
+                        <a class="page-link" href="?page=<?= $totalPages ?>">
+                            <i class="fas fa-angle-double-right"></i>
                         </a>
                     </li>
+
+
                 </ul>
             </nav>
         </div>
