@@ -44,7 +44,15 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
             <nav aria-label="Page navigation example">
                 <ul class="pagination d-flex justify-content-end">
 
-                    <li class="page-item">
+                    <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
+                        <!-- disabled  a連結禁止點擊 -->
+                        <a class="page-link" href="?page=1">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </li>
+
+                    <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
+                        <!-- disabled  a連結禁止點擊 -->
                         <a class="page-link" href="?page=<?= $page - 1 ?>">
                             <i class="fas fa-arrow-left"></i>
                         </a>
@@ -59,8 +67,14 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
                     <?php endfor; ?>
 
 
-                    <li class="page-item">
+                    <li class="page-item <?= $page >= $totalPages ? 'disabled' : ''  ?>">
                         <a class="page-link" href="?page=<?= $page + 1 ?>">
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+
+                    <li class="page-item <?= $page >= $totalPages ? 'disabled' : ''  ?>">
+                        <a class="page-link" href="?page=<?= $totalPages?>">
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </li>
