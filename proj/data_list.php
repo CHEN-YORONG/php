@@ -3,8 +3,24 @@ include __DIR__ . '/partoals/init.php';
 
 $title = '資料列表';
 
+//固定每一頁最多幾筆
+$perPage = 5;
 
-$row = $pdo->query("SELECT * FROM address_book LIMIT 8")
+
+//用戶決定查看第幾頁
+$page = isset($_GET['page']) ? intval($_GET['page']) :1 ;   //intval(轉換成整數)
+
+//總共有幾筆
+$totalRows = $pdo->query("SELECT count(1) FROM address_book")->fetch(PDO::FETCH_NUM)[0];
+// echo $totalRows; exit; 查看總共幾筆
+
+
+//總共有幾頁才能生出分業按鈕
+
+$totalPages = ceil($totalRows/$perPage); //ceil() 無條件進位
+// echo "$totalRows,$totalPages"; exit; 查看幾筆,幾頁
+
+$row = $pdo->query("SELECT * FROM address_book ORDER BY sid DESC LIMIT 5") //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的資料開始排
     ->fetchAll();
 
 
