@@ -20,7 +20,15 @@ $totalRows = $pdo->query("SELECT count(1) FROM address_book")->fetch(PDO::FETCH_
 $totalPages = ceil($totalRows/$perPage); //ceil() 無條件進位
 // echo "$totalRows,$totalPages"; exit; 查看幾筆,幾頁
 
-$row = $pdo->query("SELECT * FROM address_book ORDER BY sid DESC LIMIT 5") //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的資料開始排
+
+//SELECT * FROM address_book ORDER BY sid DESC LIMIT 0,5  (索引直0開始  , 5個)
+//SELECT * FROM address_book ORDER BY sid DESC LIMIT 5,5  第二頁
+//($page-1)*$perPage  第二頁 (2-1)*5=5   第三頁 (3-1)*5=10
+
+$sql = sprintf("SELECT * FROM address_book ORDER BY sid DESC LIMIT %s,%s", ($page-1)*$perPage , $perPage );
+
+
+$row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的資料開始排
     ->fetchAll();
 
 
