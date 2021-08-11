@@ -99,6 +99,11 @@ $title = '新增資料';
                 }).then(r => r.json())
                 .then(obj => {
                     console.log(obj);
+                    if(obj.success){
+                        location.href='data_list.php';
+                    }else{
+                        alert(obj.error);
+                    }
                 })
                 .catch(error => {
                     console.log('error:', error);
