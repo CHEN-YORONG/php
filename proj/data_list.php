@@ -116,7 +116,9 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
                             <td><?= $r['sid'] ?></td>
                             <td><?= $r['name'] ?></td>
                             <td><?= $r['email'] ?></td>
-                            <td><?= $r['mobile'] ?></td>
+                            <td><?= htmlentities($r['mobile']) ?></td>  
+                            <!-- 1. strip_tags()  輸入框輸入  alert('爛芭樂') 會直接顯示 不會    跳alert -->
+                            <!-- **2.  htmlentities()  同上 特殊符號的跳脫 比較好的方式-->
                             <td><?= $r['bithday'] ?></td>
                         </tr>
                     <?php endforeach; ?>
