@@ -11,6 +11,13 @@ $output=[
 'postData' => $_POST,
 
 ];
+//判斷有沒有帳號和密碼
+if(!isset($_POST['name']) or !isset($_POST['email'])){
+    $output['error']='沒有姓名或EMAIL';
+    $output['code']=440;
+    echo json_encode($output,JSON_UNESCAPED_UNICODE);
+    exit; //直接離開 (中斷)
+}
 
 
 

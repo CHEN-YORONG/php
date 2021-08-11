@@ -21,6 +21,16 @@ $output=[
     'code' => 0,
 
 ];
+
+//判斷有沒有帳號和密碼
+if(!isset($_POST['account']) or !isset($_POST['password'])){
+    $output['error']='沒有帳號資料或密碼';
+    $output['code']=400;
+    echo json_encode($output,JSON_UNESCAPED_UNICODE);
+    exit; //直接離開 (中斷)
+}
+
+
 //$_POST['account']
 if(! isset($users[$_POST['account']])){
     $output['error']='帳號錯誤';
