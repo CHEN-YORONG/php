@@ -80,16 +80,16 @@ $title = '新增資料';
 
 
         let isPass = true;
-        // if (name.value.length < 2) {
-        //     isPass = false;
-        //     name.nextElementSibling.innerHTML = '請填寫正確的名字'; //nextElementSibling 下一個  <SMALL>
-        //     name.style.border = '1px red solid';
-        // }
-        // if (!email_re.test(email.value)) {
-        //     isPass = false;
-        //     email.nextElementSibling.innerHTML = '請填寫正確的EMAIL';
-        //     email.style.border = '1px red solid';
-        // }
+        if (name.value.length < 2) {
+            isPass = false;
+            name.nextElementSibling.innerHTML = '請填寫正確的名字'; //nextElementSibling 下一個  <SMALL>
+            name.style.border = '1px red solid';
+        }
+        if (!email_re.test(email.value)) {
+            isPass = false;
+            email.nextElementSibling.innerHTML = '請填寫正確的EMAIL';
+            email.style.border = '1px red solid';
+        }
         if (isPass) {
 
             const fd = new FormData(document.form1);
