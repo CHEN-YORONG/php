@@ -14,9 +14,26 @@ $output=[
 
 
 
-//TODO : 資料格式檢查
+// TODO : 資料格式檢查
+if(strlen($_POST['name'])<2){
+
+    $output['error']='姓名長度太短';
+    $output['code']=410;
+    echo json_encode($output);
+    exit;
+}
+
+if(! filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+    $output['error']='email 格式錯誤';
+    $output['code']=420;
+    echo json_encode($output);
+    exit;
+}
 
 
+
+
+// var_dump(filter_var('bob@example.com', FILTER_VALIDATE_EMAIL)); //檢查EMAIL格式
 
 
 
@@ -48,7 +65,9 @@ $stmt->execute([
 ]);
 
 $output['rowCount'] = $stmt ->rowCount(); //新增的筆數
-
+if($stmt->rowCount()==1){
+    $output['success'] =true;
+}
 echo json_encode($output);
 ?>
 
