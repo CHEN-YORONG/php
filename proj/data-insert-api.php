@@ -64,7 +64,7 @@ $stmt->execute([
     $_POST['mobile'],
     $_POST['bithday'],
 ]);
-
+//PHP ->  等於 .
 $output['rowCount'] = $stmt ->rowCount(); //新增的筆數
 if($stmt->rowCount()==1){
     $output['success'] =true;
