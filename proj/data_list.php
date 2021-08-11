@@ -129,7 +129,7 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
                     <?php foreach ($row as $r) : ?>
                         <tr>
                             <td>
-                                <a href="#">
+                                <a href="data-delete.php?sid=<?= $r['sid'] ?>">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </td>
@@ -141,7 +141,7 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
                             <!-- **2.  htmlentities()  同上 特殊符號的跳脫 比較好的方式-->
                             <td><?= $r['bithday'] ?></td>
                             <td>
-                                <a href="#">
+                                <a href="data-edit.php?sid=<?= $r['sid'] ?> ">
                                     <i class="far fa-edit"></i>
                                 </a>
                             </td>
