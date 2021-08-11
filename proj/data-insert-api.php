@@ -2,6 +2,20 @@
 include __DIR__ .'/partoals/init.php';
 // echo json_encode($_POST);
 
+$output=[
+'success' => false,
+'error' => '',
+'code' => 0,
+'rowCount' => 0,
+'postData' => $_POST,
+
+];
+
+
+
+
+//TODO : 資料格式檢查
+
 
 
 
@@ -33,11 +47,8 @@ $stmt->execute([
     $_POST['bithday'],
 ]);
 
+$output['rowCount'] = $stmt ->rowCount(); //新增的筆數
 
-
-echo json_encode([
-    'rowCount' => $stmt->rowCount(), //新增的筆數
-    'postData' => $_POST,
-]);
+echo json_encode($output);
 ?>
 
