@@ -175,11 +175,27 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
 <script>
     const myTable = document.querySelector('table');
 
-    myTable.addEventListener('click',function(event){
-        console.log(event.target);
+    myTable.addEventListener('click', function(event){
+        
         //判斷有沒有點到橙色的垃圾桶 contains 包含
         if(event.target.classList.contains('ajaxDelete')){
-            console.log(event.target.closest('tr')); //event.target 往外找 closest 最接近 tr的
+            // console.log(event.target.closest('tr')); //event.target 往外找 closest 最接近 tr的
+            const tr = event.target.closest('tr');
+            const sid = tr.getAttribute('data-sid');
+            console.log(sid);
+
+            if(confirm(`是否刪除編號為${sid}的資料`)){
+                fetch('data-delete-api.php?sid=' + sid)
+                .then(r=>r.json())
+                .then(obj=>{
+                    if(obj.success){
+                        tr.remove();  //從DOM 裡移除元素
+                    }else{
+                        alert(obj.error);
+                    }
+                });
+            }
+
         }
     })
 </script>
