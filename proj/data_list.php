@@ -53,6 +53,11 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
     table tbody i.fas.fa-trash-alt{
         color: darkred;
     }
+    table tbody i.fas.fa-trash-alt.ajaxDelete  {
+        color: orange;
+        cursor: pointer; 
+        /* 改變滑鼠游標 */
+        }
 </style>
 
 
@@ -117,6 +122,7 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
                     <tr>
                         <!-- `sid`, `name`, `email`, `mobile`, `bithday`, `created_at` -->
                         <th scope="col"><i class="far fa-trash-alt"></i></th>
+                        <th scope="col"><i class="far fa-trash-alt"> ajax</i></th>
                         <th scope="col">sid</th>
                         <th scope="col">name</th>
                         <th scope="col">email</th>
@@ -127,12 +133,15 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
                 </thead>
                 <tbody>
                     <?php foreach ($row as $r) : ?>
-                        <tr>
+                        <tr data-sid="<?= $r['sid'] ?>">
                             <td>
-                                <a href="data-delete.php?sid=<?= $r['sid'] ?>"
-                                    onclick="return confirm('確定要刪除編號為<?=$r['sid']?>的資料嗎?')"> <!-- 跳出提示確認是否刪除 -->
+                                <a href="data-delete.php?sid=<?= $r['sid'] ?>" onclick="return confirm('確定要刪除編號為<?= $r['sid'] ?>的資料嗎?')">
+                                    <!-- 跳出提示確認是否刪除 -->
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
+                            </td>
+                            <td>
+                                <i class="fas fa-trash-alt ajaxDelete"></i>
                             </td>
                             <td><?= $r['sid'] ?></td>
                             <td><?= $r['name'] ?></td>
@@ -162,4 +171,18 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
     </div>
 </div>
 <?php include __DIR__ . '/partoals/scripts.php'; ?>
+
+<script>
+    const myTable = document.querySelector('table');
+
+    myTable.addEventListener('click',function(event){
+        console.log(event.target);
+        //判斷有沒有點到橙色的垃圾桶 contains 包含
+        if(event.target.classList.contains('ajaxDelete')){
+            console.log(event.target.closest('tr')); //event.target 往外找 closest 最接近 tr的
+        }
+    })
+</script>
+
+
 <?php include __DIR__ . '/partoals/html-foot.php'; ?>
