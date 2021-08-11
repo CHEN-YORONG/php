@@ -1,6 +1,7 @@
 <?php 
 include __DIR__ .'/partoals/init.php';
 // echo json_encode($_POST);
+header('Content-Type: application/json');
 
 $output=[
 'success' => false,
