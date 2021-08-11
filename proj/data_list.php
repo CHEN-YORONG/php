@@ -129,7 +129,8 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
                     <?php foreach ($row as $r) : ?>
                         <tr>
                             <td>
-                                <a href="data-delete.php?sid=<?= $r['sid'] ?>">
+                                <a href="data-delete.php?sid=<?= $r['sid'] ?>"
+                                    onclick="return confirm('確定要刪除編號為<?=$r['sid']?>的資料嗎?')"> <!-- 跳出提示確認是否刪除 -->
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </td>
