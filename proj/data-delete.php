@@ -10,8 +10,12 @@ if(! empty($sid)){  //empty(0) = true
     $stmt = $pdo->query($sql); //
 }
 
-header('Location:data_list.php');
 
+if(isset($_SERVER['HTTP_REFERER'])){
+    header("Location: ". $_SERVER['HTTP_REFERER']);
+} else {
+    header('Location: data_list.php');
+}
 
 
 
