@@ -22,12 +22,12 @@ $totalPages = ceil($totalRows / $perPage); //ceil() 無條件進位
 
 
 //讓page的值在安全的範圍 <1的 都是0  page=多大 都跳到$totalPages
-if($page<1){
+if ($page < 1) {
     header('Location:?page=1');
     exit;
 }
-if($page>$totalPages){
-    header('Location:?page='. $totalPages);
+if ($page > $totalPages) {
+    header('Location:?page=' . $totalPages);
     exit;
 }
 
@@ -48,6 +48,14 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
 ?>
 <?php include __DIR__ . '/partoals/html-head.php'; ?>
 <?php include __DIR__ . '/partoals/navbar.php'; ?>
+
+<style>
+    table tbody i.fas.fa-trash-alt{
+        color: darkred;
+    }
+</style>
+
+
 <div class="container">
     <div class="row">
         <div class="col">
@@ -71,14 +79,14 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
 
 
 
-                    <?php for ($i = $page-5; $i <= $page+5; $i++) : 
-                          if($i>=1 and $i<=$totalPages):
-                        ?>
+                    <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
+                        if ($i >= 1 and $i <= $totalPages) :
+                    ?>
 
-                        <li class="page-item <?= $i == $page ? 'active' : '' ?>"><a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a></li>
-                        <!-- active b4屬性 反白 -->
-                    <?php 
-                    endif;
+                            <li class="page-item <?= $i == $page ? 'active' : '' ?>"><a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a></li>
+                            <!-- active b4屬性 反白 -->
+                    <?php
+                        endif;
                     endfor; ?>
 
                     <!-- 下一頁 -->
@@ -108,23 +116,35 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
                 <thead>
                     <tr>
                         <!-- `sid`, `name`, `email`, `mobile`, `bithday`, `created_at` -->
+                        <th scope="col"><i class="far fa-trash-alt"></i></th>
                         <th scope="col">sid</th>
                         <th scope="col">name</th>
                         <th scope="col">email</th>
                         <th scope="col">mobile</th>
                         <th scope="col">bithday</th>
+                        <th scope="col"><i class="far fa-edit"></i></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($row as $r) : ?>
                         <tr>
+                            <td>
+                                <a href="#">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
                             <td><?= $r['sid'] ?></td>
                             <td><?= $r['name'] ?></td>
                             <td><?= $r['email'] ?></td>
-                            <td><?= htmlentities($r['mobile']) ?></td>  
+                            <td><?= htmlentities($r['mobile']) ?></td>
                             <!-- 1. strip_tags()  輸入框輸入  alert('爛芭樂') 會直接顯示 不會    跳alert -->
                             <!-- **2.  htmlentities()  同上 特殊符號的跳脫 比較好的方式-->
                             <td><?= $r['bithday'] ?></td>
+                            <td>
+                                <a href="#">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
