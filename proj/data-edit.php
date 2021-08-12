@@ -127,7 +127,7 @@ if(empty($row)){
                 .then(obj => {
                     console.log(obj);
                     if(obj.success){
-                        location.href='data_list.php';
+                        alert('修改成功');
                     }else{
                         alert(obj.error);
                     }
