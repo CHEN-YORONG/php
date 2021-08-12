@@ -139,10 +139,10 @@ if ($totalRows != 0) {
                     <?php foreach ($row as $r) : ?>
                         <tr data-sid="<?= $r['sid'] ?>">
                             <td>
-                                <a href="data-delete.php?sid=<?= $r['sid'] ?>" onclick="return confirm('確定要刪除編號為<?= $r['sid'] ?>的資料嗎?')">
-                                    <!-- 跳出提示確認是否刪除 -->
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-outline-warning del1btn" data-toggle="modal" data-target="#exampleModal">
                                     <i class="fas fa-trash-alt"></i>
-                                </a>
+                                </button>
                             </td>
                             <td>
                                 <i class="fas fa-trash-alt ajaxDelete"></i>
@@ -174,10 +174,31 @@ if ($totalRows != 0) {
 
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">刪除注意</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 <?php include __DIR__ . '/partoals/scripts.php'; ?>
 
 <script>
     const myTable = document.querySelector('table');
+    const modal = $('#exampleModal');
 
     myTable.addEventListener('click', function(event) {
 
@@ -202,6 +223,14 @@ if ($totalRows != 0) {
 
         }
     })
+    
+    $('.del1btn').on('click',function(event){
+        console.log(event.target);
+    })
+
+    modal.on('show.bs.modal',function(event){
+        console.log(event.target);
+    });
 </script>
 
 
