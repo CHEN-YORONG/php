@@ -15,32 +15,35 @@ $totalRows = $pdo->query("SELECT count(1) FROM address_book")->fetch(PDO::FETCH_
 // echo $totalRows; exit; 查看總共幾筆
 
 
-//總共有幾頁才能生出分業按鈕
+//要有資料才能取讀該頁的資料
+$row = [];
+if ($totalRows != 0) {
 
-$totalPages = ceil($totalRows / $perPage); //ceil() 無條件進位
-// echo "$totalRows,$totalPages"; exit; 查看幾筆,幾頁
+    //總共有幾頁才能生出分業按鈕
+    $totalPages = ceil($totalRows / $perPage); //ceil() 無條件進位
+    // echo "$totalRows,$totalPages"; exit; 查看幾筆,幾頁
 
 
-//讓page的值在安全的範圍 <1的 都是0  page=多大 都跳到$totalPages
-if ($page < 1) {
-    header('Location:?page=1');
-    exit;
+    //讓page的值在安全的範圍 <1的 都是0  page=多大 都跳到$totalPages
+    if ($page < 1) {
+        header('Location:?page=1');
+        exit;
+    }
+    if ($page > $totalPages) {
+        header('Location:?page=' . $totalPages);
+        exit;
+    }
+
+    //SELECT * FROM address_book ORDER BY sid DESC LIMIT 0,5  (索引直0開始  , 5個)
+    //SELECT * FROM address_book ORDER BY sid DESC LIMIT 5,5  第二頁
+    //($page-1)*$perPage  第二頁 (2-1)*5=5   第三頁 (3-1)*5=10
+
+    $sql = sprintf("SELECT * FROM address_book ORDER BY sid DESC LIMIT %s,%s", ($page - 1) * $perPage, $perPage);
+
+
+    $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的資料開始排
+        ->fetchAll();
 }
-if ($page > $totalPages) {
-    header('Location:?page=' . $totalPages);
-    exit;
-}
-
-//SELECT * FROM address_book ORDER BY sid DESC LIMIT 0,5  (索引直0開始  , 5個)
-//SELECT * FROM address_book ORDER BY sid DESC LIMIT 5,5  第二頁
-//($page-1)*$perPage  第二頁 (2-1)*5=5   第三頁 (3-1)*5=10
-
-$sql = sprintf("SELECT * FROM address_book ORDER BY sid DESC LIMIT %s,%s", ($page - 1) * $perPage, $perPage);
-
-
-$row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的資料開始排
-    ->fetchAll();
-
 
 
 
@@ -50,14 +53,15 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
 <?php include __DIR__ . '/partoals/navbar.php'; ?>
 
 <style>
-    table tbody i.fas.fa-trash-alt{
+    table tbody i.fas.fa-trash-alt {
         color: darkred;
     }
-    table tbody i.fas.fa-trash-alt.ajaxDelete  {
+
+    table tbody i.fas.fa-trash-alt.ajaxDelete {
         color: orange;
-        cursor: pointer; 
+        cursor: pointer;
         /* 改變滑鼠游標 */
-        }
+    }
 </style>
 
 
@@ -175,25 +179,25 @@ $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的
 <script>
     const myTable = document.querySelector('table');
 
-    myTable.addEventListener('click', function(event){
-        
+    myTable.addEventListener('click', function(event) {
+
         //判斷有沒有點到橙色的垃圾桶 contains 包含
-        if(event.target.classList.contains('ajaxDelete')){
+        if (event.target.classList.contains('ajaxDelete')) {
             // console.log(event.target.closest('tr')); //event.target 往外找 closest 最接近 tr的
             const tr = event.target.closest('tr');
             const sid = tr.getAttribute('data-sid');
             console.log(sid);
 
-            if(confirm(`是否刪除編號為${sid}的資料`)){
+            if (confirm(`是否刪除編號為${sid}的資料`)) {
                 fetch('data-delete-api.php?sid=' + sid)
-                .then(r=>r.json())
-                .then(obj=>{
-                    if(obj.success){
-                        tr.remove();  //從DOM 裡移除元素
-                    }else{
-                        alert(obj.error);
-                    }
-                });
+                    .then(r => r.json())
+                    .then(obj => {
+                        if (obj.success) {
+                            tr.remove(); //從DOM 裡移除元素
+                        } else {
+                            alert(obj.error);
+                        }
+                    });
             }
 
         }
