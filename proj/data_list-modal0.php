@@ -189,7 +189,7 @@ if ($totalRows != 0) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary modal-del-btn">delete</button>
             </div>
         </div>
     </div>
@@ -224,12 +224,22 @@ if ($totalRows != 0) {
         }
     })
     
+    let willDeleteID=0;
+
     $('.del1btn').on('click',function(event){
-        console.log(event.target);
+        willDeleteId = event.target.closest('tr').dataset.sid;
+        console.log(willDeleteId);
+        modal.find('.modal-body').html(`確定要刪除編號為 ${willDeleteId}的資料嗎？`);
+        
     })
 
+    modal.find('.modal-del-btn').on('click',function(event){
+        location.href=(`data-delete.php?sid=${willDeleteId}`)
+    })
+
+    //modal 一開始顯示觸發
     modal.on('show.bs.modal',function(event){
-        console.log(event.target);
+        // console.log(event.target);
     });
 </script>
 
