@@ -39,6 +39,7 @@ if(empty($row)){
                 <div class="card-body">
                     <h5 class="card-title">修改資料</h5>
                     <form name="form1" onsubmit="checkForm();return false;">
+                        <input type="hidden" name="sid" value="<?= $row['sid']?>"> <!-- 傳送資料給另一個PHP -->
                         <div class="form-group">
                             <label for="name">name *</label>
                             <input type="text" class="form-control" id="name" name="name"  value="<?= htmlentities($row['name'])?>"> <!-- value 顯示資料 -->
@@ -62,6 +63,14 @@ if(empty($row)){
                             <input type="date" class="form-control" id="bithday" name="bithday" value="<?= htmlentities($row['bithday'])?>"> <!-- value 顯示資料 -->
                             <small class="form-text "></small>
                         </div>
+                        <!-- 
+                        <div class="form-group">
+                            <label for="address">address</label>
+                            <textarea class="form-control" id="address" name="address" cols="30" rows="3"
+                            ><?= htmlentities($r['address']) ?></textarea>
+                            <small class="form-text "></small>
+                        </div>
+                         -->
 
                         <button type="submit" class="btn btn-primary">修改</button>
                     </form>
