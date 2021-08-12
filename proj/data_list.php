@@ -6,6 +6,8 @@ $title = '資料列表';
 //固定每一頁最多幾筆
 $perPage = 5;
 
+//query string paramters
+$qs=[];
 
 //關鍵字查詢
 $keyword = isset($_GET['keyword'])? $_GET['keyword'] : '';
@@ -18,6 +20,8 @@ $where = 'WHERE 1';
 if(! empty($keyword)){
     //$where .= " AND `name` LIKE '%{$keyword}%' "; //sql injection 漏洞
     $where .= sprintf(" AND `name` LIKE %s", $pdo->quote('%'. $keyword. '%') ); 
+
+    $qs['keyword']=$keyword;
 };
 
 //總共有幾筆
@@ -107,7 +111,9 @@ if ($totalRows != 0) {
                     <!-- 上一頁 -->
                     <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
                         <!-- disabled  a連結禁止點擊 -->
-                        <a class="page-link" href="?page=<?= $page - 1 ?>">
+                        <a class="page-link" 
+                        href="?<?php $qs['page']= $page - 1;
+                                     echo http_build_query($qs); ?>">
                             <i class="fas fa-arrow-left"></i>
                         </a>
                     </li>
@@ -117,9 +123,10 @@ if ($totalRows != 0) {
 
                     <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
                         if ($i >= 1 and $i <= $totalPages) :
+                            $qs['page'] =$i;
                     ?>
 
-                            <li class="page-item <?= $i == $page ? 'active' : '' ?>"><a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a></li>
+                            <li class="page-item <?= $i == $page ? 'active' : '' ?>"><a class="page-link" href="?<?= http_build_query($qs) ?>"><?= $i ?></a></li>
                             <!-- active b4屬性 反白 -->
                     <?php
                         endif;
@@ -127,7 +134,7 @@ if ($totalRows != 0) {
 
                     <!-- 下一頁 -->
                     <li class="page-item <?= $page >= $totalPages ? 'disabled' : ''  ?>">
-                        <a class="page-link" href="?page=<?= $page + 1 ?>">
+                        <a class="page-link" href="?<?php $qs['page']=$page + 1; echo http_build_query($qs); ?>">
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </li>
