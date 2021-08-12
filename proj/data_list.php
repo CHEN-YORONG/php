@@ -66,6 +66,18 @@ if ($totalRows != 0) {
 
 
 <div class="container">
+
+    <!-- 搜尋 -->
+    <div class="row mb-3 mt-3">
+        <div class="col d-flex justify-content-end">
+            <form action="data_list.php" class="form-inline my-2 my-lg-0 ">
+                <input name="keyword" class="form-control mr-sm-2 " type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 分頁 -->
     <div class="row">
         <div class="col">
             <nav aria-label="Page navigation example">
@@ -118,7 +130,7 @@ if ($totalRows != 0) {
         </div>
     </div>
 
-
+    <!-- 通訊錄 -->
     <div class="row">
         <div class="col">
             <table class="table table-striped table-bordered">
