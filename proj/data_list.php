@@ -7,20 +7,31 @@ $title = '資料列表';
 $perPage = 5;
 
 
+//關鍵字查詢
+$keyword = isset($_GET['keyword'])? $_GET['keyword'] : '';
+
+
 //用戶決定查看第幾頁
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;   //intval(轉換成整數)
 
+$where = 'WHERE 1';
+if(! empty($keyword)){
+    //$where .= " AND `name` LIKE '%{$keyword}%' "; //sql injection 漏洞
+    $where .= sprintf(" AND `name` LIKE %s", $pdo->quote('%'. $keyword. '%') ); 
+};
+
 //總共有幾筆
-$totalRows = $pdo->query("SELECT count(1) FROM address_book")->fetch(PDO::FETCH_NUM)[0];
+$totalRows = $pdo->query("SELECT count(1) FROM address_book $where ")
+->fetch(PDO::FETCH_NUM)[0];
 // echo $totalRows; exit; 查看總共幾筆
 
-
+//總共有幾頁才能生出分業按鈕
+$totalPages = ceil($totalRows / $perPage); //ceil() 無條件進位
 //要有資料才能取讀該頁的資料
 $row = [];
 if ($totalRows != 0) {
 
-    //總共有幾頁才能生出分業按鈕
-    $totalPages = ceil($totalRows / $perPage); //ceil() 無條件進位
+    
     // echo "$totalRows,$totalPages"; exit; 查看幾筆,幾頁
 
 
@@ -38,7 +49,10 @@ if ($totalRows != 0) {
     //SELECT * FROM address_book ORDER BY sid DESC LIMIT 5,5  第二頁
     //($page-1)*$perPage  第二頁 (2-1)*5=5   第三頁 (3-1)*5=10
 
-    $sql = sprintf("SELECT * FROM address_book ORDER BY sid DESC LIMIT %s,%s", ($page - 1) * $perPage, $perPage);
+    $sql = sprintf("SELECT * FROM address_book %s ORDER BY sid DESC LIMIT %s,%s", 
+    $where,
+    ($page - 1) * $perPage, 
+    $perPage);
 
 
     $row = $pdo->query($sql) //ORDER BY sid DESC 從後面排回來8 .7 .6 最新的資料開始排
@@ -71,7 +85,8 @@ if ($totalRows != 0) {
     <div class="row mb-3 mt-3">
         <div class="col d-flex justify-content-end">
             <form action="data_list.php" class="form-inline my-2 my-lg-0 ">
-                <input name="keyword" class="form-control mr-sm-2 " type="search" placeholder="Search" aria-label="Search">
+                <input name="keyword" class="form-control mr-sm-2 " type="search" placeholder="Search" aria-label="Search"  
+                value="<?= htmlentities($keyword) ?>">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
