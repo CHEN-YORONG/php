@@ -41,7 +41,7 @@ $title = '新增資料';
 
                         <div class="form-group">
                             <label for="bithday">bithday</label>
-                            <input type="text" class="form-control" id="bithday" name="bithday">
+                            <input type="date" class="form-control" id="bithday" name="bithday">
                             <small class="form-text "></small>
                         </div>
 
