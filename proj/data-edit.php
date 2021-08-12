@@ -41,25 +41,25 @@ if(empty($row)){
                     <form name="form1" onsubmit="checkForm();return false;">
                         <div class="form-group">
                             <label for="name">name *</label>
-                            <input type="text" class="form-control" id="name" name="name"  value="<?= $row['name']?>"> <!-- value 顯示資料 -->
+                            <input type="text" class="form-control" id="name" name="name"  value="<?= htmlentities($row['name'])?>"> <!-- value 顯示資料 -->
                             <small class="form-text "></small>
                         </div>
 
                         <div class="form-group">
                             <label for="email">email *</label>
-                            <input type="text" class="form-control" id="email" name="email" value="<?= $row['email']?>"> <!-- value 顯示資料 -->
+                            <input type="text" class="form-control" id="email" name="email" value="<?= htmlentities($row['email'])?>"> <!-- value 顯示資料 htmlentities()特殊字元顯示 -->
                             <small class="form-text "></small>
                         </div>
 
                         <div class="form-group">
                             <label for="mobile">mobile</label>
-                            <input type="text" class="form-control" id="mobile" name="mobile" value="<?= $row['mobile']?>"> <!-- value 顯示資料 -->
+                            <input type="text" class="form-control" id="mobile" name="mobile" value="<?= htmlentities($row['mobile'])?>"> <!-- value 顯示資料 -->
                             <small class="form-text "></small>
                         </div>
 
                         <div class="form-group">
                             <label for="bithday">bithday</label>
-                            <input type="date" class="form-control" id="bithday" name="bithday" value="<?= $row['bithday']?>"> <!-- value 顯示資料 -->
+                            <input type="date" class="form-control" id="bithday" name="bithday" value="<?= htmlentities($row['bithday'])?>"> <!-- value 顯示資料 -->
                             <small class="form-text "></small>
                         </div>
 
