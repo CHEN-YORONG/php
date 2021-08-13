@@ -51,10 +51,10 @@ if (empty($row)) {
                 <div class="card-body">
                     <h5 class="card-title">修改資料</h5>
                     <form name="form1" onsubmit="checkForm();return false;">
-                        <input type="hidden" name="sid" value="<?= $row['sid'] ?>"> <!-- 傳送資料給另一個PHP -->
+                        
                         <div class="form-group">
                             <label for="name">大頭貼</label>
-                            <input type="file" class="form-control" id="avatar" name="avatar" > 
+                            <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*" > 
                             <?php if(empty($row['avatar'])): ?>
                                 <!-- 預設大頭貼 -->
                             <?php else: ?>
