@@ -11,7 +11,7 @@
 
 <form action="0811-05-file.php" name="form1" method="post" enctype="multipart/form-data">
 <!-- enctype="multipart/form-data"  上傳檔案一定要加 -->
-<input type="file" name="avatar" accept="image/*">  <!-- accept="image/*" 只能選圖檔 -->
+<input type="file" name="avatar" accept="image/*"> <!-- accept="image/*" 只能選圖檔 --> 
 <br>
 <input type="text" name="name" placeholder="姓名">
 <br>
