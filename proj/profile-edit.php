@@ -93,7 +93,7 @@ if (empty($row)) {
     function checkForm() {
 
             const fd = new FormData(document.form1);
-            fetch('profile-edit.php', {
+            fetch('profile-edit-api.php', {
                     method: 'POST',
                     body: fd
                 }).then(r => r.json())
