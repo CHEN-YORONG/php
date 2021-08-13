@@ -1,7 +1,28 @@
 <pre>
 <?php
 
-var_dump($_FILES);
+//上傳後的檔案路徑
+$folder = __DIR__. '/img/';
+
+//如果有上傳檔案
+if(!empty($_FILES)){
+    
+    if(move_uploaded_file(
+        $_FILES['avatar']['tmp_name'],
+        $folder. $_FILES['avatar']['name']
+        
+        )){
+            echo 'ok';
+    }else {
+        echo 'move file errors';
+    
+    }
+}else{
+    echo 'no file';
+}
+
+
+//var_dump($_FILES);
 
 //單一個檔案
 // $_FILES['avatar']['name']  //上傳檔案的原來黨名
